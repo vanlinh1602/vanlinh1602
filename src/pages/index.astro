@@ -5,7 +5,7 @@ import { getEntry } from "astro:content";
 import { i18n } from "../i18n/translation";
 import I18nKey from "../i18n/i18nKey";
 import Markdown from "@components/misc/Markdown.astro";
-import { bioConfig} from "@/config"
+import { bioConfig } from "@/config";
 
 const homePost = await getEntry("spec", "home");
 
@@ -17,52 +17,179 @@ const { Content } = await homePost.render();
     class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
   >
     <div class="card-base z-10 px-9 py-6 relative w-full">
-      <Markdown class="mt-2">
-        <Content />
-      </Markdown>
-    {
-        bioConfig.map(group => (
+      <div>
+        <img
+          src="https://readme-typing-svg.herokuapp.com?font=Architects+Daughter&color=7AF79A&size=30&lines=Hey!+I'm+Linh+Nguyễn!;I'm+a+Software+Developer..."
+          alt="avatar"
+          class="w-full"
+        />
+        <div class="flex">
+          <div>
             <div>
-                <div class="flex flex-row w-full items-center h-[3.75rem]">
-                    <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">{group.year}</div>
-                    <div class="w-[15%] md:w-[10%]">
-                        <div class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
-                    </div>
-                </div>
-                {group.activities.map(post => (
-                    <a
-                       aria-label={post.message}
-                       class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]"
-                    >
-                        <div class="flex flex-row justify-start items-center h-full">
-                            <!-- date -->
-                            <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
-                                {post.date}
-                            </div>
-                            <!-- dot and line -->
-                            <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
-                                <div class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
-                                bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
-                                outline outline-4 z-50
-                                outline-[var(--card-bg)]
-                                group-hover:outline-[var(--btn-plain-bg-hover)]
-                                group-active:outline-[var(--btn-plain-bg-active)]
-                                "
-                                ></div>
-                            </div>
-                            <!-- post title -->
-                            <div class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
-                                group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                                text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
-                            >
-                                    {post.message}
-                            </div>
-                        </div>
-                    </a>
-                ))}
+              <h3 class="font-semibold text-2xl">Hi 🌎, my name is Linh</h3>
             </div>
-        ))
-    }
+            <ul>
+              <li>🌱 I’m currently Working in Xbot JSC</li>
+              <li>
+                🏡 I'm living in a small city in <code>Việt Nam</code> 🇻🇳 👈 🏙️
+              </li>
+              <li>🤝 I’m available for freelancing.</li>
+              <li>📝 And I'm studying English but I'm very lazy 😅</li>
+              <li>
+                ⚡ Fun fact: I like watching anime and playing game of Hoyoverst
+              </li>
+              <li>❤️ thank you so much for reading it ❤️</li>
+            </ul>
+          </div>
+          <div>
+            <a href="https://app.daily.dev/monsieurkuma"
+              ><img
+                src="https://api.daily.dev/devcards/v2/fKnPl6IPEJqM9dysMIHKM.png?type=default&r=8na"
+                width="356"
+                alt="Linh Nguyễn's Dev Card"
+              /></a
+            >
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-2xl my-2">Languages and Tools:</h3>
+          <table>
+            <tr>
+              <td
+                style="font-weight: bold; padding-right: 10px; vertical-align: center; border: none;"
+                >Backend:</td
+              >
+              <td
+                ><img
+                  height="40"
+                  src="https://skillicons.dev/icons?i=nodejs,express,nestjs"
+                /></td
+              >
+            </tr>
+            <tr>
+              <td
+                style="font-weight: bold; padding-right: 10px; vertical-align: center;"
+                >Frontend:</td
+              >
+              <td
+                ><img
+                  height="40"
+                  src="https://skillicons.dev/icons?i=react,mui,bootstrap,html,css,js,ts,tailwind"
+                /></td
+              >
+            </tr>
+            <tr>
+              <td
+                style="font-weight: bold; padding-right: 10px; vertical-align: center; border: none;"
+                >Database:</td
+              >
+              <td
+                ><img
+                  height="40"
+                  src="https://skillicons.dev/icons?i=mysql,sqlite,mongodb,firebase"
+                /></td
+              >
+            </tr>
+            <tr>
+              <td
+                style="font-weight: bold; padding-right: 10px; vertical-align: center; border: none;"
+                >Other Tools:</td
+              >
+              <td
+                ><img
+                  height="40"
+                  src="https://skillicons.dev/icons?i=bots,discordjs,bun,vite"
+                /></td
+              >
+            </tr>
+          </table>
+        </div>
+
+        <h3 class="font-semibold text-2xl my-2">Activity:</h3>
+        <div class="flex flex-col items-center justify-center">
+          <img
+            src="https://github-readme-activity-graph.vercel.app/graph?username=vanlinh1602&bg_color=100f0f&color=4c5e9e&line=4c569e&point=403e41&area=true&hide_border=true"
+            alt="avatar"
+            class="w-full"
+          />
+          <div>
+            <a href="https://github.com/vanlinh1602" class="flex">
+              <img
+                height="180em"
+                src="https://github-readme-stats.vercel.app/api/top-langs?username=vanlinh1602&show_icons=true&locale=en&layout=compact&theme=tokyonight"
+                alt="vanlinh1602"
+              />
+              <img
+                height="180em"
+                src="https://github-readme-stats.vercel.app/api?username=vanlinh1602&show_icons=true&locale=en&layout=compact&theme=tokyonight"
+                alt="vanlinh1602"
+              />
+            </a>
+          </div>
+          <p>
+            <a href="https://github.com/vanlinh1602">
+              <img
+                src="https://github-readme-streak-stats.herokuapp.com/?user=vanlinh1602&&theme=tokyonight"
+                alt="vanlinh1602"
+              />
+            </a>
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-2xl my-2">Connect with me:</h3>
+          <div class="flex flex-col">
+            <div class="flex justify-center">
+              ❤️
+              <a href="https://www.facebook.com/MonsieurKuma" target="blank">
+                <img
+                  src="https://img.icons8.com/clouds/100/facebook-new.png"
+                  alt="linh nguyễn"
+                  height="40"
+                  width="40"
+                /></a
+              >
+              <a href="https://x.com/vanlinh2002" target="blank">
+                <img
+                  src="https://img.icons8.com/ios-filled/50/twitterx--v1.png"
+                  alt="vanlinh2002"
+                  height="40"
+                  width="40"
+                /></a
+              >
+              <a
+                href="https://discord.com/users/776054010414497823"
+                target="blank"
+              >
+                <img
+                  src="https://img.icons8.com/bubbles/100/discord-logo.png"
+                  alt="776054010414497823"
+                  height="40"
+                  width="40"
+                /></a
+              >
+              <a href="mailto:linhnv1622@gmail.com" target="blank">
+                <img
+                  width="40"
+                  height="40"
+                  src="https://img.icons8.com/bubbles/100/new-post.png"
+                  alt="new-post"
+                />
+              </a>
+              ❤️
+            </div>
+            <a
+              href="https://discord.com/channels/@me/835488546897920021"
+              class="flex justify-center"
+            >
+              <img
+                src="https://lanyard-profile-readme.vercel.app/api/776054010414497823?animated=true&theme=dark&borderRadius=30px"
+                alt="connect discord"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </MainGridLayout>

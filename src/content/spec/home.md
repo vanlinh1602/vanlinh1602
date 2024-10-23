@@ -1,4 +1,3 @@
-
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Architects+Daughter&color=7AF79A&size=30&lines=Hey!+I'm+Linh+Nguyễn!;I'm+a+Software+Developer...)](https://git.io/typing-svg)
 <div>
 <div>
@@ -58,7 +57,7 @@
 
 [![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=vanlinh1602&bg_color=100f0f&color=4c5e9e&line=4c569e&point=403e41&area=true&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
 
-<div align="center">
+<div class="center">
   <a href="https://github.com/vanlinh1602">
     <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs?username=vanlinh1602&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="vanlinh1602"/>
     <img height="180em" src="https://github-readme-stats.vercel.app/api?username=vanlinh1602&show_icons=true&locale=en&layout=compact&theme=tokyonight" alt="vanlinh1602"/>
