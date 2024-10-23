@@ -37,13 +37,9 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
+    LinkPreset.Blog,
     LinkPreset.Archive,
-    LinkPreset.About,
-    {
-      name: 'GitHub',
-      url: 'https://github.com/vanlinh1602',     // Internal links should not include the base path, as it is automatically added
-      external: true,                               // Show an external link icon and will open in a new tab
-    },
+    LinkPreset.Projects,
   ],
 }
 
@@ -162,3 +158,33 @@ export const skillsConfig: SkillsConfig = {
     }
   ]
 }
+
+export const bioConfig = [
+  {
+    year: 2002,
+    activities: [
+      {
+        date: '10/06/2002',
+        message: 'Born in Ba Ria - Vung Tau, Vietnam',
+      }
+    ]
+  },
+  {
+    year: 2020,
+    activities: [
+      {
+        date: '09/2022',
+        message: 'Study at UIT (University of Information Technology)',
+      },
+    ]
+  },
+  {
+    year: 2022,
+    activities: [
+      {
+        date: '10/2022',
+        message: 'Work at Xbot JSC (to present)',
+      },
+    ]
+  }
+]
