@@ -1,0 +1,86 @@
+---
+import path from "path";
+import "./card-portfolio.css";
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  description: string;
+  imgSrc: string;
+  skills: string[];
+  repoURL: string;
+  demoURL: string;
+  averageBrightness: number;
+}
+
+const {
+  title,
+  description,
+  imgSrc,
+  skills,
+  repoURL,
+  demoURL,
+  averageBrightness,
+} = Astro.props;
+
+let img;
+const files = import.meta.glob<ImageMetadata>("../../**", {
+  import: "default",
+});
+let normalizedPath = path
+  .normalize(path.join("../../", imgSrc))
+  .replace(/\\/g, "/");
+const file = files[normalizedPath];
+if (!file) {
+  console.error(
+    `\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`
+  );
+}
+img = await file();
+---
+
+<div class="card__portfolio dark:text-white text-gray-500">
+  <Image
+    src={img}
+    alt={title}
+    crossorigin="anonymous"
+    height={130}
+    width={332}
+    loading="lazy"
+    average-brightness={averageBrightness}
+  />
+
+  <div class="descripcion__container">
+    <h2 class="card__title">{title}</h2>
+    <div class="descripcion">
+      <p>{description}</p>
+
+      <div class="skills">
+        {
+          skills.map((skill) => (
+            <iconify-icon
+              class="iconify text-3xl"
+              icon={`skill-icons:${skill}`}
+            />
+          ))
+        }
+      </div>
+
+      <div class="buttons pb-0">
+        <a href={repoURL} target="_blank" class="flex justify-end items-center">
+          <spa class="text-xs">
+            Github
+            <iconify-icon icon="quill:link-out"></iconify-icon>
+          </spa>
+        </a>
+
+        <a href={demoURL} target="_blank" class="flex justify-end items-center">
+          <span class="text-xs">
+            Visit
+            <iconify-icon icon="quill:link-out"></iconify-icon>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

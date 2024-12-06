@@ -84,14 +84,17 @@ export type BlogPostData = {
   nextSlug?: string
 }
 
-export type SkillsConfig = {
-  enable: boolean
-  category: {
-    name: string
-    skills: {
-      name: string
-      icon: string
-      level?: number
-    }[]
-  }[]
+export type Project = {
+  title: string;
+  description: string;
+  imgSrc: string;
+  /* 
+    * The skills required for the project
+    * Get Icons name in: https://icon-sets.iconify.design/skill-icons
+  */
+  skills: string[];
+  repoURL: string;
+  demoURL: string;
+  averageBrightness: number;
 }
+  

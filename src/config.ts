@@ -2,8 +2,8 @@ import type {
   LicenseConfig,
   NavBarConfig,
   ProfileConfig,
+  Project,
   SiteConfig,
-  SkillsConfig,
 } from './types/config'
 import { LinkPreset } from './types/config'
 
@@ -69,95 +69,11 @@ export const profileConfig: ProfileConfig = {
 }
 
 export const licenseConfig: LicenseConfig = {
-  enable: true,
+  enable: false,
   name: 'CC BY-NC-SA 4.0',
   url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
 }
 
-export const skillsConfig: SkillsConfig = {
-  enable: true,
-  category: [
-    {
-      name: 'Frontend',
-      skills: [
-        {
-          name: 'HTML',
-          icon: 'fa5-brands:html5',
-        },
-        {
-          name: 'CSS',
-          icon: 'fa5-brands:css3',
-        },
-        {
-          name: 'JavaScript',
-          icon: 'fa5-brands:js',
-        },
-        {
-          name: 'TypeScript',
-          icon: 'fa5-brands:typescript',
-        },
-        {
-          name: 'React',
-          icon: 'fa5-brands:react',
-        },
-        {
-          name: "Tailwind CSS",
-          icon: "fa5-brands:tailwindcss",
-        },
-        {
-          name: "Ant Design",
-          icon: "fa5-brands:ant-design",
-        },
-      ],
-    }, 
-    {
-      name: 'Backend',
-      skills: [
-        {
-          name: 'Node.js',
-          icon: 'fa5-brands:node-js',
-        },
-        {
-          name: 'Express',
-          icon: 'fa5-brands:node-js',
-        },
-        {
-          name: 'NestJS',
-          icon: 'fa5-brands:node-js',
-        },
-        {
-          name: 'REST API',
-          icon: 'fa5-solid:server',
-        },
-        {
-          name: 'GraphQL',
-          icon: 'fa5-brands:graphql',
-        },
-        {
-          name: 'MongoDB',
-          icon: 'fa5-brands:mongodb',
-        },
-      ],
-    },
-    {
-      name: 'Tools',
-      skills: [
-        {
-          name: 'Git',
-          icon: 'fa5-brands:git',
-        },
-        {
-          name: 'GitHub',
-          icon: 'fa5-brands:github',
-        },
-        {
-          name: 'VS Code',
-          icon: 'fa5-brands:visual-studio-code',
-        },
-      ],
-    }
-  ]
-}
 
 export const bioConfig = [
   {
@@ -187,4 +103,23 @@ export const bioConfig = [
       },
     ]
   }
+]
+
+export const languagesAndTools = [
+  'nodejs', 'express', 'nestjs', 
+  'react','mui','bootstrap','html','css','js','ts','tailwind', 
+  'mysql','sqlite','mongodb','firebase', 
+  'bots','discordjs','bun','vite'
+]
+
+export const projects: Project[]  = [
+  {
+    title: 'QR Banking',
+    description: 'Create and customize a QR code for banking transactions. Can be used for both personal and business purposes.',
+    imgSrc: 'assets/projects/qr-banking.jpg',
+    skills: ['react-light', 'vite-light', 'tailwindcss-light'],
+    repoURL: 'https://github.com/vanlinh1602/qr-banking',
+    demoURL: 'https://qr-banking.linhnv.online/',
+    averageBrightness: 0.5,    
+  },
 ]

@@ -1,20 +1,14 @@
 ---
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
-import { getEntry } from "astro:content";
 import { i18n } from "../i18n/translation";
 import I18nKey from "../i18n/i18nKey";
-import Markdown from "@components/misc/Markdown.astro";
-import { bioConfig } from "@/config";
-
-const homePost = await getEntry("spec", "home");
-
-const { Content } = await homePost.render();
+import { languagesAndTools } from "@/config";
 ---
 
-<MainGridLayout title={i18n(I18nKey.blog)} description={i18n(I18nKey.blog)}>
+<MainGridLayout title={i18n(I18nKey.home)} description={i18n(I18nKey.blog)}>
   <div
-    class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+    class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32 dark:text-white"
   >
     <div class="card-base z-10 px-9 py-6 relative w-full">
       <div>
@@ -23,7 +17,7 @@ const { Content } = await homePost.render();
           alt="avatar"
           class="w-full"
         />
-        <div class="flex">
+        <div class="flex flex-col md:flex-row">
           <div>
             <div>
               <h3 class="font-semibold text-2xl">Hi 🌎, my name is Linh</h3>
@@ -52,58 +46,21 @@ const { Content } = await homePost.render();
           </div>
         </div>
 
-        <div>
+        <div class="flex flex-col">
           <h3 class="font-semibold text-2xl my-2">Languages and Tools:</h3>
-          <table>
-            <tr>
-              <td
-                style="font-weight: bold; padding-right: 10px; vertical-align: center; border: none;"
-                >Backend:</td
-              >
-              <td
-                ><img
-                  height="40"
-                  src="https://skillicons.dev/icons?i=nodejs,express,nestjs"
-                /></td
-              >
-            </tr>
-            <tr>
-              <td
-                style="font-weight: bold; padding-right: 10px; vertical-align: center;"
-                >Frontend:</td
-              >
-              <td
-                ><img
-                  height="40"
-                  src="https://skillicons.dev/icons?i=react,mui,bootstrap,html,css,js,ts,tailwind"
-                /></td
-              >
-            </tr>
-            <tr>
-              <td
-                style="font-weight: bold; padding-right: 10px; vertical-align: center; border: none;"
-                >Database:</td
-              >
-              <td
-                ><img
-                  height="40"
-                  src="https://skillicons.dev/icons?i=mysql,sqlite,mongodb,firebase"
-                /></td
-              >
-            </tr>
-            <tr>
-              <td
-                style="font-weight: bold; padding-right: 10px; vertical-align: center; border: none;"
-                >Other Tools:</td
-              >
-              <td
-                ><img
-                  height="40"
-                  src="https://skillicons.dev/icons?i=bots,discordjs,bun,vite"
-                /></td
-              >
-            </tr>
-          </table>
+          <div class="">
+            {
+              languagesAndTools.map((item) => (
+                <div class="float-left pt-2 pr-2">
+                  <img
+                    height="40"
+                    width="40"
+                    src={`https://skillicons.dev/icons?i=${item}`}
+                  />
+                </div>
+              ))
+            }
+          </div>
         </div>
 
         <h3 class="font-semibold text-2xl my-2">Activity:</h3>
@@ -114,7 +71,10 @@ const { Content } = await homePost.render();
             class="w-full"
           />
           <div>
-            <a href="https://github.com/vanlinh1602" class="flex">
+            <a
+              href="https://github.com/vanlinh1602"
+              class="flex flex-col md:flex-row"
+            >
               <img
                 height="180em"
                 src="https://github-readme-stats.vercel.app/api/top-langs?username=vanlinh1602&show_icons=true&locale=en&layout=compact&theme=tokyonight"
