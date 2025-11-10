@@ -9,9 +9,6 @@
     </a>
     <ul>
         <li>
-            🌱 I’m currently Working in Xbot JSC
-        </li>
-        <li>
             🏡 I'm living in a small city in <code>Việt Nam</code> 🇻🇳 👈 🏙️
         </li>
         <li>
