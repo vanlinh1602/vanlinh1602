@@ -29,6 +29,9 @@
 .motionButton:hover {
   background: var(--yellow-soft);
 }
+.musicButton {
+  right: calc(max(20px, env(safe-area-inset-right)) + 54px);
+}
 .brandHeading {
   position: absolute;
   top: max(20px, env(safe-area-inset-top));
@@ -146,25 +149,39 @@
 }
 @media (max-width: 700px) {
   .motionButton {
-    top: max(12px, env(safe-area-inset-top));
-    right: 12px;
-  }
-  .brandHeading {
-    top: max(12px, env(safe-area-inset-top));
-    left: 12px;
-  }
-  .brand {
-    padding: 8px 12px 8px 8px;
-  }
-  .brandMark {
+    top: max(10px, env(safe-area-inset-top));
+    right: 10px;
     width: 36px;
     height: 36px;
+    border-radius: 10px;
+  }
+  .motionButton svg {
+    width: 18px;
+    height: 18px;
+  }
+  .musicButton {
+    right: 54px;
+  }
+  .brandHeading {
+    top: max(10px, env(safe-area-inset-top));
+    left: 10px;
+  }
+  .brand {
+    gap: 8px;
+    padding: 5px 10px 5px 5px;
+    border-radius: 12px;
+  }
+  .brandMark {
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 8px;
   }
   .brandName {
-    font-size: 0.95rem;
+    font-size: 0.82rem;
   }
   .brandTitle {
-    font-size: 0.7rem;
+    font-size: 0.64rem;
   }
   .nav {
     right: 14px;
@@ -172,15 +189,24 @@
     width: 180px;
   }
   .compactNav {
-    left: 12px;
-    right: 12px;
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
     width: auto;
+    gap: 2px;
+    padding: 2px;
     justify-content: space-around;
   }
   .compactNav .navButton {
     flex: 1;
-    font-size: 0.74rem;
-    padding: 8px;
+    height: 36px;
+    gap: 5px;
+    font-size: 0.7rem;
+    padding: 6px;
+  }
+  .compactNav .navButton svg {
+    width: 16px;
+    height: 16px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

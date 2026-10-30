@@ -10,6 +10,8 @@ export const COPY = {
   backToTown: 'Về khu phố',
   home: 'Trang chủ',
   navigation: 'Điều hướng',
+  muteMusic: 'Tắt nhạc nền',
+  playMusic: 'Bật nhạc nền',
   pauseMotion: 'Tạm dừng hoạt ảnh',
   resumeMotion: 'Tiếp tục hoạt ảnh',
   petCat: 'Chạm vào mèo để vuốt ve',

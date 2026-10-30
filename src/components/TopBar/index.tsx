@@ -11,6 +11,8 @@ interface TopBarProps {
   onSelect: (section: ActiveSection) => void;
   isMotionEnabled: boolean;
   onToggleMotion: () => void;
+  isMusicEnabled: boolean;
+  onToggleMusic: () => void;
 }
 
 export default function TopBar({
@@ -18,6 +20,8 @@ export default function TopBar({
   onSelect,
   isMotionEnabled,
   onToggleMotion,
+  isMusicEnabled,
+  onToggleMusic,
 }: TopBarProps) {
   return (
     <header className={styles.topBar}>
@@ -64,6 +68,30 @@ export default function TopBar({
           ) : (
             <path d="M 8 4 L 20 12 L 8 20 Z" />
           )}
+        </svg>
+      </button>
+      <button
+        className={clsx(styles.motionButton, styles.musicButton)}
+        onClick={onToggleMusic}
+        aria-label={isMusicEnabled ? COPY.muteMusic : COPY.playMusic}
+        title={isMusicEnabled ? COPY.muteMusic : COPY.playMusic}
+        aria-pressed={isMusicEnabled}
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M 9 18 V 6 L 19 4 V 16" />
+          <circle cx="6.5" cy="18" r="2.5" />
+          <circle cx="16.5" cy="16" r="2.5" />
+          {!isMusicEnabled && <path d="M 3 21 L 21 3" />}
         </svg>
       </button>
       {/* Keyboard and screen-reader fallback for the map districts. */}
