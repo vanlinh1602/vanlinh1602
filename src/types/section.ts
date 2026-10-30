@@ -4,7 +4,7 @@ export enum ENUM_SECTION {
   CONTACT = 'contact',
 }
 
-/** `null` means no section is open and the camera shows the whole room. */
+/** `null` means no section is open and the map shows the whole town. */
 export type ActiveSection = ENUM_SECTION | null;
 
 export interface SectionMeta {

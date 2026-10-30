@@ -1,38 +1,61 @@
 :root {
-  --pink: #ff9ec4;
-  --pink-deep: #ff6f9f;
-  --pink-soft: #ffe4ec;
-  --blue: #9ad7ff;
-  --blue-soft: #e8f6ff;
-  --blue-pale: #f4fbff;
-  --yellow: #ffe27a;
-  --yellow-deep: #ffc94d;
-  --ink: #5b4a6b;
-  --white: #fffafc;
-  --background: #ffeef4;
+  --pink: #db9e92;
+  --pink-deep: #954e43;
+  --pink-soft: #f5e5dc;
+  --blue: #9eafb0;
+  --blue-soft: #e4ece7;
+  --blue-pale: #eff2e9;
+  --yellow: #f0dcab;
+  --yellow-deep: #c39c59;
+  --yellow-soft: #faf0d6;
+  --grass: #c1cf95;
+  --ink: #51443a;
+  --ink-muted: #756454;
+  --white: #fff9ec;
+  --background: #f5efdf;
+  --mint: #acd3c3;
+  --line: #d7c8af;
+  --line-strong: #9c8269;
+  --label-border: #b69a7a;
+  --paper-shadow: 0 12px 36px rgb(65 53 36 / 13%);
+  --focus: #855047;
+  --map-highlight: rgb(255 249 236 / 8%);
 }
-
 * {
   box-sizing: border-box;
 }
-
 html,
 body,
 #root {
   height: 100%;
   margin: 0;
-  font-family: 'Fredoka', system-ui, sans-serif;
+  font-family: 'Nunito', system-ui, sans-serif;
   color: var(--ink);
   background: var(--background);
   overflow: hidden;
 }
-
+body {
+  -webkit-font-smoothing: antialiased;
+}
 button,
 a {
-  font-family: inherit;
+  font: inherit;
   color: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
-
 button {
   cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+::selection {
+  color: var(--ink);
+  background: var(--yellow);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) var(--background);
 }

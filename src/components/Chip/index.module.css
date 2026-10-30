@@ -1,23 +1,23 @@
 .chip {
   background: var(--pink-soft);
-  border: 2px solid var(--pink);
-  border-radius: 999px;
-  padding: 4px 12px;
-  font-size: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 0.82rem;
 }
-
 .small {
-  font-size: 0.78rem;
-  padding: 2px 10px;
+  font-size: 0.72rem;
+  padding: 3px 8px;
   background: var(--blue-soft);
-  border-color: var(--blue);
+  border-color: transparent;
 }
-
 .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
 }
-
 .link:hover {
-  background: var(--yellow);
+  background: var(--yellow-soft);
 }

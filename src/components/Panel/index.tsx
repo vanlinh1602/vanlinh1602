@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
 
+import SectionIcon from '@/components/SectionIcon';
 import { COPY, SECTIONS } from '@/content';
 import { type ActiveSection, ENUM_SECTION } from '@/types';
 
@@ -22,22 +23,45 @@ const SECTION_CONTENT: Readonly<Record<ENUM_SECTION, ComponentType>> = {
 export default function Panel({ active, onClose }: PanelProps) {
   if (!active) return null;
 
-  const { label, emoji } = SECTIONS[active];
+  const { label } = SECTIONS[active];
   const Content = SECTION_CONTENT[active];
 
   return (
-    <aside className={styles.panel} role="dialog" aria-label={label}>
-      <button
-        className={styles.close}
-        onClick={onClose}
-        aria-label={COPY.closePanel}
-      >
-        ✕
+    <aside
+      id="profile-section"
+      className={styles.panel}
+      role="region"
+      aria-label={label}
+    >
+      <div className={styles.panelHeader}>
+        <h2>
+          <SectionIcon section={active} />
+          {label}
+        </h2>
+        <button
+          className={styles.close}
+          onClick={onClose}
+          aria-label={COPY.closePanel}
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            aria-hidden="true"
+          >
+            <path d="m 6 6 12 12 M 18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+      <div className={styles.panelBody} key={active}>
+        <Content />
+      </div>
+      <button className={styles.backButton} onClick={onClose}>
+        <span aria-hidden="true">←</span> {COPY.backToTown}
       </button>
-      <h2>
-        {emoji} {label}
-      </h2>
-      <Content />
     </aside>
   );
 }

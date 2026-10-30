@@ -1,5 +1,4 @@
 import js from '@eslint/js';
-import reactThree from '@react-three/eslint-plugin';
 import stylistic from '@stylistic/eslint-plugin';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -19,7 +18,6 @@ export default tseslint.config(
     },
     plugins: {
       '@stylistic': stylistic,
-      '@react-three': reactThree,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSortPlugin,
@@ -27,8 +25,6 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      '@react-three/no-clone-in-loop': 'error',
-      '@react-three/no-new-in-loop': 'error',
       '@stylistic/padding-line-between-statements': [
         'error',
         { blankLine: 'always', prev: 'function', next: 'function' },

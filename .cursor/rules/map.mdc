@@ -1,0 +1,47 @@
+---
+description: 2D town map (SVG) conventions
+globs: src/components/TownMap/**
+alwaysApply: true
+---
+
+Rules for the SVG town map in `src/components/TownMap/`. Pairs with `react.mdc`.
+
+## Layout
+
+```
+src/components/TownMap/
+├── index.tsx             # Svg root: applies the zoom transform, places districts
+├── District.tsx          # Building hit region and mounted facade sign
+├── LivingScenery.tsx     # Cats and ambient scenery composition
+├── WanderingCat.tsx      # Sprite animation, route and petting feedback
+├── Atmosphere.tsx        # Birds, butterflies, wind and reflections
+├── living.module.css    # Sprite and scenery animations
+└── index.module.css      # Camera controls and district interaction states
+```
+
+- Buildings and ground are baked into `public/images/town/background.png`. Reference artwork and generation prompts live outside `public/`; see `docs/artwork/README.md`.
+- `District` positions hit regions and facade signs relative to `DISTRICT_POSITIONS`. Keep these aligned with the backdrop.
+- Interaction (hover, click, label) belongs to `District`.
+- Map units: the viewBox is `MAP_SIZE` (1000 x 700). Never use pixels for layout.
+
+## Colors And Numbers
+
+- Every SVG color comes from `PALETTE` in `@/configs`; never write a hex string in a map file.
+- District positions and zoom views live in `configs/mapViews.ts` (`DISTRICT_POSITIONS`, `HOME_VIEW`, `SECTION_VIEWS`, `FOCUS_ANCHOR`).
+- CSS `transform` overrides an SVG `transform` attribute on the same element. Keep the positioning `transform` attribute on an outer `<g>` and put hover/animation classes on an inner `<g>`.
+
+## Adding A New Section (District)
+
+1. Add a member to `ENUM_SECTION` in `src/types/section.ts`.
+2. Fix every TypeScript error that follows — each `Record<ENUM_SECTION, …>` needs an entry:
+   - `content/sections.ts` (label + emoji)
+   - `configs/mapViews.ts` (`DISTRICT_POSITIONS` and `SECTION_VIEWS`)
+   - `components/Panel/index.tsx` (a new `Panel/<Name>Content.tsx`)
+   - `configs/mapViews.ts` (`DISTRICT_SHAPES`, `DISTRICT_SIGNS`)
+3. Align the new hit region and sign with a landmark in the backdrop; update the artwork only when needed.
+4. Add any new text to `src/content/`.
+
+## Accessibility And Motion
+
+- The `<svg>` is `aria-hidden`; the `TopBar` nav buttons are the keyboard and screen-reader equivalent of every district.
+- Every CSS animation or transition needs a `prefers-reduced-motion` override in `index.module.css`.

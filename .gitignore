@@ -13,6 +13,9 @@ dist-ssr
 *.cache
 *.tsbuildinfo
 
+# Temporary generation and browser QA artifacts
+output/
+
 # Editor directories and files
 .idea
 .cursor/mcp.json

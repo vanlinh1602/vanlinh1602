@@ -1,3 +1,3 @@
 export * from './content';
-export * from './scene';
+export * from './map';
 export * from './section';

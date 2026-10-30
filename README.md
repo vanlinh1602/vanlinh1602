@@ -12,10 +12,10 @@
 
 <p align="center">
   <a href="https://vanlinh1602.github.io/vanlinh1602/">
-    <img alt="Step into my 3D room" src="https://img.shields.io/badge/%F0%9F%8F%A0%20Step%20into%20my%203D%20room-ff6f9f?style=for-the-badge&logo=threedotjs&logoColor=white" />
+    <img alt="Wander through my little town" src="https://img.shields.io/badge/%F0%9F%8F%A1%20Wander%20through%20my%20little%20town-ff6f9f?style=for-the-badge&logoColor=white" />
   </a>
   <br />
-  <sub>A tiny pastel room built with React Three Fiber. Click the cat, the monitor or the books ✨</sub>
+  <sub>A tiny pastel town drawn in SVG. Click a building to visit, or pet a wandering cat ✨</sub>
 </p>
 
 <br />
@@ -25,7 +25,7 @@
 <a href="https://app.daily.dev/monsieurkuma"><img align="right" width="320" alt="Linh Nguyễn's Dev Card" src="https://api.daily.dev/devcards/v2/fKnPl6IPEJqM9dysMIHKM.png?type=default&r=8na" /></a>
 
 - 🏡 Living in a small city in **Việt Nam** 🇻🇳
-- 💻 **Software engineer** with a soft spot for interactive 3D on the web
+- 💻 **Software engineer** with a soft spot for interactive experiences on the web
 - 🤝 **Available for freelancing**, so feel free to reach out
 - 📝 Studying English (slowly… very slowly 😅)
 - ⚡ Fun fact: I love anime and HoYoverse games
@@ -58,26 +58,18 @@
 
 <!-- Update the descriptions here when a repo gets a proper GitHub description. -->
 
-| Project                                                                      | What it is                                 | Built with                                                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🏠 [**3D Portfolio**](https://vanlinh1602.github.io/vanlinh1602/)            | This profile as a cute interactive 3D room | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white) ![Three.js](https://img.shields.io/badge/-Three.js-5b4a6b?style=flat-square&logo=threedotjs&logoColor=white) |
-| 📚 [**Manga-Extension**](https://github.com/vanlinh1602/Manga-Extension)     | Browser extension that translates comics   | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)                                                                                                              |
-| 🗺️ [**Wander-View**](https://github.com/vanlinh1602/Wander-View)             | —                                          | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)                                                                                                              |
-| 💪 [**HealthTrackingApp**](https://github.com/vanlinh1602/HealthTrackingApp) | Health tracking app                        | ![JavaScript](https://img.shields.io/badge/-JavaScript-f7df1e?style=flat-square&logo=javascript&logoColor=black)                                                                                                              |
-| 📰 [**News-App**](https://github.com/vanlinh1602/News-App)                   | News app                                   | ![Dart](https://img.shields.io/badge/-Dart-0175c2?style=flat-square&logo=dart&logoColor=white)                                                                                                                                |
+| Project                                                                      | What it is                                  | Built with                                                                                                                                                                                                         |
+| ---------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 🏠 [**Town Portfolio**](https://vanlinh1602.github.io/vanlinh1602/)          | This profile as a cute interactive town map | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white) ![React](https://img.shields.io/badge/-React-5b4a6b?style=flat-square&logo=react&logoColor=white) |
+| 📚 [**Manga-Extension**](https://github.com/vanlinh1602/Manga-Extension)     | Browser extension that translates comics    | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)                                                                                                   |
+| 🗺️ [**Wander-View**](https://github.com/vanlinh1602/Wander-View)             | —                                           | ![TypeScript](https://img.shields.io/badge/-TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)                                                                                                   |
+| 💪 [**HealthTrackingApp**](https://github.com/vanlinh1602/HealthTrackingApp) | Health tracking app                         | ![JavaScript](https://img.shields.io/badge/-JavaScript-f7df1e?style=flat-square&logo=javascript&logoColor=black)                                                                                                   |
+| 📰 [**News-App**](https://github.com/vanlinh1602/News-App)                   | News app                                    | ![Dart](https://img.shields.io/badge/-Dart-0175c2?style=flat-square&logo=dart&logoColor=white)                                                                                                                     |
 
 ## 📊 GitHub activity
 
 <p align="center">
   <img alt="GitHub streak" src="https://streak-stats.demolab.com/?user=vanlinh1602&hide_border=true&background=00000000&ring=FF9EC4&fire=FF6F9F&currStreakNum=FF6F9F&currStreakLabel=FF6F9F&sideNums=8B7AA0&sideLabels=8B7AA0&dates=8B7AA0&stroke=9AD7FF" />
-</p>
-
-<!-- Generated daily by .github/workflows/snake.yml into the `output` branch. -->
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vanlinh1602/vanlinh1602/output/github-snake-dark.svg" />
-    <img width="100%" alt="Snake eating my contribution graph" src="https://raw.githubusercontent.com/vanlinh1602/vanlinh1602/output/github-snake.svg" />
-  </picture>
 </p>
 
 <p align="center">

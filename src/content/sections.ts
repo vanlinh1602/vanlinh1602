@@ -1,6 +1,6 @@
 import { ENUM_SECTION, type SectionMeta } from '@/types';
 
-/** Labels shown in the nav bar and on the floating tags in the 3D scene. */
+/** Labels shown in the nav bar and on the district tags on the town map. */
 export const SECTIONS: Readonly<Record<ENUM_SECTION, SectionMeta>> = {
   [ENUM_SECTION.PROJECTS]: { label: 'Dự án', emoji: '💻' },
   [ENUM_SECTION.ABOUT]: { label: 'Giới thiệu', emoji: '🐱' },

@@ -1,0 +1,186 @@
+.viewport {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: none;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  background: var(--mint);
+}
+.canvas {
+  display: grid;
+  place-items: center;
+  width: max(100%, calc(max(100vw, 100dvh * 10 / 7) * var(--map-zoom)));
+  height: max(100%, calc(max(100dvh, 100vw * 7 / 10) * var(--map-zoom)));
+}
+.viewport:active {
+  cursor: grabbing;
+}
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+.viewport:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -4px;
+}
+.map {
+  display: block;
+  width: calc(max(100vw, 100dvh * 10 / 7) * var(--map-zoom));
+  height: calc(max(100dvh, 100vw * 7 / 10) * var(--map-zoom));
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--mint);
+}
+.world {
+  transform-origin: 0 0;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tapEffect {
+  animation: tapFade 0.85s ease-out both;
+  pointer-events: none;
+}
+.tapRing {
+  transform-origin: 0 0;
+  animation: tapSpread 0.8s ease-out both;
+}
+.tapSparkle {
+  animation: tapStars 0.85s ease-out both;
+}
+.world[data-motion='paused'] .tapEffect,
+.world[data-motion='paused'] .tapRing,
+.world[data-motion='paused'] .tapSparkle {
+  animation-play-state: paused;
+}
+@keyframes tapFade {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes tapSpread {
+  from {
+    opacity: 0.9;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
+@keyframes tapStars {
+  from {
+    transform: translateY(2px);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+.district {
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.dimmed {
+  opacity: 0.55;
+}
+.buildingHit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
+}
+.district:hover .buildingHit,
+.active .buildingHit {
+  fill: var(--map-highlight);
+}
+.labelPlate {
+  transition: filter 0.2s ease;
+}
+.district:hover .labelPlate,
+.active .labelPlate {
+  filter: brightness(1.1);
+}
+.label text {
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 800;
+}
+.zoomControls {
+  position: fixed;
+  left: max(20px, env(safe-area-inset-left));
+  bottom: max(82px, calc(env(safe-area-inset-bottom) + 66px));
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: var(--paper-shadow);
+}
+.zoomControls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+.zoomControls button:hover:not(:disabled) {
+  background: var(--yellow-soft);
+}
+.zoomControls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.zoomValue {
+  padding: 4px 0;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 700px) {
+  .zoomControls {
+    top: 126px;
+    bottom: auto;
+    left: 12px;
+    flex-direction: row;
+  }
+  .zoomControls[data-focused='true'] {
+    top: 82px;
+  }
+  .zoomValue {
+    min-width: 38px;
+    text-align: center;
+  }
+  .viewport {
+    overflow: auto;
+  }
+  .map {
+    min-width: 0;
+  }
+  .world {
+    transform: none !important;
+  }
+  .map[data-focused='true'] .world {
+    transform: var(--mobile-transform) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world,
+  .district,
+  .buildingHit,
+  .labelPlate {
+    transition: none;
+  }
+}

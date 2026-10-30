@@ -1,0 +1,303 @@
+.layer {
+  pointer-events: none;
+}
+.cloud {
+  opacity: 0.88;
+  animation: cloudDrift 32s ease-in-out infinite alternate;
+}
+.smoke {
+  opacity: 0;
+  transform-origin: 0 0;
+  animation: smokeRise 5s ease-out infinite;
+}
+.ripple {
+  transform-origin: 0 0;
+  opacity: 0;
+  animation: waterRipple 3.2s ease-out infinite;
+}
+.lamp {
+  animation: lampWarmth 6s ease-in-out infinite alternate;
+}
+.leaf {
+  opacity: 0;
+  transform-origin: 0 0;
+  animation: leafDrift 8s ease-in-out infinite;
+}
+.facing {
+  transform-origin: 0 0;
+}
+.grayCat {
+  filter: saturate(0.12);
+}
+.spriteSheet {
+  animation: walkFrames 0.64s steps(1, end) infinite;
+}
+.layer[data-motion='paused'] * {
+  animation-play-state: paused;
+}
+@keyframes walkFrames {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-256px, 0);
+  }
+  50% {
+    transform: translate(0, -256px);
+  }
+  75% {
+    transform: translate(-256px, -256px);
+  }
+}
+@keyframes cloudDrift {
+  from {
+    transform: translateX(-38px);
+  }
+  to {
+    transform: translateX(46px);
+  }
+}
+@keyframes smokeRise {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.65);
+  }
+  18% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(14px, -43px) scale(2.2);
+  }
+}
+@keyframes waterRipple {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  18% {
+    opacity: 0.78;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@keyframes lampWarmth {
+  from {
+    opacity: 0.18;
+  }
+  to {
+    opacity: 0.72;
+  }
+}
+@keyframes leafDrift {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-20deg);
+  }
+  25% {
+    opacity: 0.75;
+  }
+  70% {
+    opacity: 0.55;
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: translate(40px, 31px) rotate(160deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .layer:not([data-motion='running']) * {
+    animation-play-state: paused;
+  }
+}
+.catRoute {
+  cursor: pointer;
+}
+.catHit {
+  fill: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+.catCheer {
+  pointer-events: none;
+  animation: petCheer 1.3s ease-out both;
+}
+.catCheerStill {
+  pointer-events: none;
+}
+.catHop {
+  animation: petHop 0.48s ease-out;
+  transform-origin: 0 0;
+}
+.windowLight {
+  animation: windowWarmth 5s ease-in-out infinite alternate;
+}
+.windowShine {
+  opacity: 0;
+  animation: windowSweep 8s ease-in-out infinite;
+}
+.screenCursor {
+  animation: cursorBlink 1.2s steps(1, end) infinite;
+}
+.waterFlow {
+  opacity: 0.45;
+  animation: waterSlide 5s ease-in-out infinite alternate;
+}
+.waterSparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: waterTwinkle 3.3s ease-in-out infinite;
+}
+.wind {
+  stroke-dasharray: 27 80;
+  opacity: 0;
+  animation: windTrail 7s ease-out infinite;
+}
+.butterflyBody {
+  animation: butterflyTilt 2.3s ease-in-out infinite alternate;
+  transform-origin: 0 0;
+}
+.butterflyWings {
+  animation: butterflyFlap 0.24s ease-in-out infinite alternate;
+  transform-origin: 0 0;
+}
+.birdWingLeft,
+.birdWingRight {
+  transform-origin: 0 0;
+  animation: birdFlap 0.44s ease-in-out infinite alternate;
+}
+.birdWingRight {
+  animation-direction: alternate-reverse;
+}
+@keyframes petCheer {
+  0% {
+    opacity: 0;
+    transform: translateY(5px) scale(0.7);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scale(0.9);
+  }
+}
+@keyframes petHop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  42% {
+    transform: translateY(-8px) rotate(-4deg);
+  }
+  72% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+@keyframes windowWarmth {
+  from {
+    opacity: 0.04;
+  }
+  to {
+    opacity: 0.23;
+  }
+}
+@keyframes windowSweep {
+  0%,
+  22% {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+  34% {
+    opacity: 0.25;
+  }
+  60% {
+    opacity: 0;
+    transform: translateX(95px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(95px);
+  }
+}
+@keyframes cursorBlink {
+  0%,
+  55% {
+    opacity: 0.85;
+  }
+  56%,
+  100% {
+    opacity: 0.1;
+  }
+}
+@keyframes waterSlide {
+  from {
+    transform: translateX(-9px);
+  }
+  to {
+    transform: translateX(12px);
+  }
+}
+@keyframes waterTwinkle {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  45% {
+    opacity: 0.85;
+    transform: scale(1.15);
+  }
+}
+@keyframes windTrail {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 50;
+    transform: translateX(-15px);
+  }
+  25% {
+    opacity: 0.65;
+  }
+  60% {
+    opacity: 0;
+    stroke-dashoffset: -50;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 0;
+    stroke-dashoffset: -50;
+    transform: translateX(20px);
+  }
+}
+@keyframes butterflyFlap {
+  from {
+    transform: scaleX(0.2);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes butterflyTilt {
+  from {
+    transform: rotate(-12deg);
+  }
+  to {
+    transform: rotate(15deg);
+  }
+}
+@keyframes birdFlap {
+  from {
+    transform: scaleY(0.35);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}

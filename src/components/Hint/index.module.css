@@ -1,17 +1,35 @@
+.mobileHint {
+  display: none;
+}
 .hint {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 22px;
+  left: 22px;
   margin: 0;
-  padding: 8px 18px;
+  padding: 10px 16px;
+  color: var(--ink);
   background: var(--white);
-  border: 3px solid var(--yellow);
-  border-radius: 999px;
-  font-size: 0.95rem;
-  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--paper-shadow);
+  font-size: 0.8rem;
   z-index: 4;
   pointer-events: none;
-  width: max-content;
-  max-width: calc(100vw - 32px);
+  max-width: calc(100vw - 300px);
+}
+@media (max-width: 700px) {
+  .desktopHint {
+    display: none;
+  }
+  .mobileHint {
+    display: inline;
+  }
+  .hint {
+    top: max(83px, calc(env(safe-area-inset-top) + 70px));
+    bottom: auto;
+    left: 12px;
+    padding: 7px 10px;
+    max-width: calc(100vw - 24px);
+    font-size: 0.68rem;
+  }
 }
