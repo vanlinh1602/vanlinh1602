@@ -214,6 +214,12 @@ export function useMapCamera({
   };
 
   const handlePointerEnd = (event: PointerEvent<HTMLDivElement>): void => {
+    // Touch capture transfers from the SVG child to the viewport when dragging.
+    if (
+      event.type === 'lostpointercapture' &&
+      event.target !== event.currentTarget
+    )
+      return;
     pointersRef.current.delete(event.pointerId);
     if (pointersRef.current.size < 2) pinchRef.current = null;
     const remaining: Vec2 | undefined = [...pointersRef.current.values()][0];
