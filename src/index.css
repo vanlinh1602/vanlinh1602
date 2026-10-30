@@ -1,0 +1,38 @@
+:root {
+  --pink: #ff9ec4;
+  --pink-deep: #ff6f9f;
+  --pink-soft: #ffe4ec;
+  --blue: #9ad7ff;
+  --blue-soft: #e8f6ff;
+  --blue-pale: #f4fbff;
+  --yellow: #ffe27a;
+  --yellow-deep: #ffc94d;
+  --ink: #5b4a6b;
+  --white: #fffafc;
+  --background: #ffeef4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  font-family: 'Fredoka', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--background);
+  overflow: hidden;
+}
+
+button,
+a {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}

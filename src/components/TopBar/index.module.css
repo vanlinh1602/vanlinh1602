@@ -1,0 +1,81 @@
+.topBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.topBar > * {
+  pointer-events: auto;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background: var(--white);
+  border: 3px solid var(--pink);
+  border-radius: 20px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 0 var(--pink);
+}
+
+.brandName {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.brandTitle {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.navButton {
+  background: var(--white);
+  border: 3px solid var(--blue);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 0 var(--blue);
+  transition: transform 0.15s;
+}
+
+.navButton:hover {
+  transform: translateY(-2px);
+}
+
+.navButton.active {
+  background: var(--yellow);
+  border-color: var(--yellow-deep);
+  box-shadow: 0 4px 0 var(--yellow-deep);
+}
+
+@media (max-width: 700px) {
+  .topBar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav {
+    justify-content: flex-start;
+  }
+
+  .navButton {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,85 @@
+---
+description: React app architecture, folder layout, and conventions for the DOM UI
+globs:
+alwaysApply: true
+---
+
+React conventions for this repo. Pairs with `typescript.mdc` (language hygiene) and `three.mdc` (3D scene). Keep this file to rules that are not obvious from `package.json`, `tsconfig*.json`, or framework defaults.
+
+## Stack
+
+- **Build**: Vite 5 + `@vitejs/plugin-react`, TypeScript strict mode.
+- **UI**: React 18 (pinned: `@react-three/fiber` v8 requires React 18 — do not bump React to 19 without also moving to fiber v9 / drei v10).
+- **3D**: three.js + `@react-three/fiber` + `@react-three/drei`. See `three.mdc`.
+- **Styling**: CSS Modules + CSS variables. No Tailwind, no CSS-in-JS.
+- **State**: local `useState` lifted to `App.tsx`. There is no router, store, or server state; do not add Zustand/React Query/React Router unless the feature genuinely needs it.
+
+## Folder Layout
+
+```
+src/
+├── main.tsx            # React root only
+├── App.tsx             # Owns `active` section state, mounts <Canvas> + DOM UI
+├── index.css           # Global reset + CSS design tokens (:root)
+├── components/         # DOM (HTML) UI rendered outside the canvas
+├── scene/              # Everything rendered inside <Canvas> (see three.mdc)
+├── content/            # All user-visible text and portfolio data
+├── configs/            # Tunable numbers/colors: camera views, 3D palette
+├── hooks/              # Shared React hooks
+├── types/              # Shared types and enums
+└── utils/              # Pure helpers (create when first needed)
+```
+
+- `components/` must not import from `scene/`, and `scene/` must not import from `components/`. They meet only in `App.tsx` and share data via `content/`, `configs/`, `types/`.
+- Never put user-visible strings in components; add them to `src/content/` (`copy.ts` for fixed UI text, the other files for portfolio data).
+- Never hardcode tunable numbers that other files depend on (camera positions, colors) inside components; put them in `src/configs/`.
+
+## Path Aliases
+
+- Always import across folders with the `@/` alias (`@/content`, `@/scene/primitives`). Relative imports are only for files in the same component directory (`./index.module.css`, `./AboutContent`).
+- Never use `../`.
+
+## Files And Exports
+
+- Every public component is a PascalCase directory with `index.tsx` (`TopBar/index.tsx`). Private sub-components are PascalCase files in the same directory (`Panel/AboutContent.tsx`) and are not re-exported.
+- Hooks, configs, content, types, utils: camelCase filenames (`hooks/keyboard.ts`, `configs/cameraViews.ts`).
+- Components use a default export. Everything else uses named exports.
+- Every folder of shared modules has a barrel: `components/index.tsx`, `scene/objects/index.tsx`, `scene/primitives/index.tsx`, `content/index.ts`, `configs/index.ts`, `hooks/index.ts`, `types/index.ts`. Component barrels use `export { default as Name } from './Name';`; others use `export * from './file';`. Keep barrel lines sorted (enforced by `simple-import-sort/exports`).
+- Module-level constants are `UPPER_SNAKE_CASE` (`SECTION_VIEWS`, `PALETTE`, `HOVER_SCALE`).
+
+## Types
+
+- Shared types live in `src/types/` (`section.ts`, `content.ts`, `scene.ts`). Component props stay in the component file as `interface <Name>Props`.
+- Section ids are the `ENUM_SECTION` enum. Any lookup keyed by section must be `Record<ENUM_SECTION, ...>` so TypeScript fails the build when a section is added but one of its pieces is missing (label, camera view, panel content).
+- Use `Vec3` from `@/types` for 3D tuples, not `number[]`.
+- Content objects are `readonly`; use `as const` for literal maps.
+
+## Components
+
+- Body order: hooks → derived values → handlers → return.
+- Name handlers `handleX` inside the component; name props `onX`.
+- Boolean props start with `is`/`has`/`can` (`isSmall`).
+- Compose conditional classes with `clsx`, never string concatenation.
+- Keep components presentational; state lives in `App.tsx` and flows down as `active` / `onSelect` / `onClose`.
+
+## Styling
+
+- Each component that needs styles has `index.module.css` next to its `index.tsx`. Class names are camelCase (`.navButton`, `.brandTitle`).
+- Colors, radii and other shared values come from CSS variables in `src/index.css`. Do not hardcode hex colors in modules; add a token instead.
+- `index.css` holds only tokens and the global reset. No component styles in global CSS.
+- Put responsive (`@media (max-width: 700px)`) and `prefers-reduced-motion` rules in the module that owns the element.
+- Avoid inline `style={{}}` except for truly dynamic runtime values.
+- DOM colors (`index.css`) and 3D colors (`configs/palette.ts`) are separate sources; when changing the theme, update both.
+
+## Accessibility
+
+- Every 3D hotspot must have a DOM equivalent (the nav buttons in `TopBar`), so the site works with keyboard and screen readers.
+- Icon-only buttons need an `aria-label` from `COPY`.
+- `Escape` closes the open panel (`useKeyDown` in `App.tsx`); keep it working.
+- Respect `prefers-reduced-motion` for new CSS animations.
+
+## Public Assets
+
+- Static files go under `public/` by purpose: `public/models/` for `.glb`, `public/textures/`, `public/images/`. Lowercase kebab-case filenames.
+- Reference them through Vite's base URL, never a bare `/`: `` `${import.meta.env.BASE_URL}models/cat.glb` ``. The site may be deployed under a subpath (GitHub Pages `/<repo>/`).
+- When renaming or removing an asset, update every reference in the same change.

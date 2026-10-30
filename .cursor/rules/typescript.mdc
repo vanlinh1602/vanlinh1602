@@ -1,0 +1,101 @@
+---
+description: TypeScript conventions and code quality rules
+globs:
+alwaysApply: true
+---
+
+These are the TypeScript conventions for this repo. Keep this file portable — pure TypeScript hygiene, no framework- or project-specific content (framework conventions live in `react.mdc`; project-specific choices are discoverable from the codebase).
+
+## Basic Principles
+
+- Use English for all code and documentation.
+- Always declare the type of each variable and function (parameters and return value).
+- Avoid `any`; use `unknown` with type guards or a runtime validator when the type is truly unknown.
+- Handle `undefined` and `null` explicitly.
+- One class/concept per file. Closely-related constants or enums may share a file.
+
+## Nomenclature
+
+- PascalCase for classes, interfaces, and React components.
+- camelCase for variables, functions, and methods.
+- kebab-case for file and directory names (see `react.mdc` for React-specific naming exceptions — PascalCase component dirs/files, camelCase hook/api/util/type files).
+- UPPERCASE for environment variables.
+- Prefix enums with `ENUM_` (e.g., `ENUM_DATASET_STATUS`).
+- Avoid magic numbers; define constants.
+- Start each function name with a verb.
+- Boolean variables: `isLoading`, `hasError`, `canDelete`, `isVisible`.
+- Use complete words; avoid abbreviations except:
+  - Standard: API, URL, DTO, etc.
+  - Conventional: `i`/`j` (loops), `err` (errors), `ctx` (contexts), `req`/`res`/`next` (middleware).
+
+## Functions
+
+- Write short functions with a single purpose.
+- Name functions with a verb.
+  - Returns boolean → `isX`, `hasX`, `canX`.
+  - Returns nothing → `executeX`, `saveX`.
+- Avoid nesting via early returns and extraction to utility functions.
+- Prefer higher-order functions (`map`, `filter`, `reduce`) where they read more clearly than a loop.
+- Arrow functions for trivial bodies (<3 statements). Named functions otherwise.
+- Use default parameter values instead of checking for null/undefined.
+- RO-RO (receive-object/return-object) for functions with more than 2 parameters.
+- Maintain a single level of abstraction within a function.
+- Mark async functions synchronous if they don't actually `await` anything.
+
+## Data
+
+- Don't abuse primitive types; encapsulate data in composite types.
+- Prefer immutability. Use `readonly` for stable fields, `as const` for literal collections.
+
+## Classes
+
+- Follow SOLID principles. Prefer composition over inheritance.
+- Declare interfaces to define contracts.
+- Keep classes small and single-purpose.
+
+## Exceptions
+
+- Use exceptions for unexpected errors.
+- Catch only to (a) recover from an expected problem, or (b) add context. Otherwise let a global handler take it.
+
+## Imports
+
+- Use path aliases (configured in `vite.config.ts` and mirrored in `tsconfig.app.json`) for cross-module imports.
+- Use relative paths only within the same module/folder.
+- Group: third-party first, then internal aliased, then module-local. Group order is enforced by `simple-import-sort`.
+
+## Testing
+
+- Do not create `*.test.*` or `*.spec.*` files under `src/`.
+- Place unit and integration tests under `test/`, mirroring the tested module's path under `src/` (for example, `src/features/user/utils/authorization.ts` is tested by `test/features/user/utils/authorization.test.ts`).
+- Use the Vitest suffixes `.test.ts` and `.test.tsx`.
+- Import application code from tests through the configured `@/` alias; do not use long relative paths to reach `src/`.
+
+## Promises
+
+- Prefer `async/await` over `.then()/.catch()` for readability.
+- Run independent async calls in parallel with `Promise.all([a(), b()])`. Use sequential `await` only when one call depends on another.
+- Never fire-and-forget — always `await` or attach a handler.
+
+## Type assertions
+
+- Prefer type guards over `as Type` assertions.
+- `as` is acceptable only when narrowing a value whose type TS cannot infer (e.g., after `JSON.parse` of a known shape).
+- Never use `as` to silence a real type mismatch. For unknown external data, use `unknown` + a guard.
+
+## Generics
+
+- Single-letter names (`T`, `K`, `V`, `E`) for short utility generics where the role is obvious.
+- Descriptive names (`TUser`, `TResponse`) when multiple type parameters coexist or have specific business meaning.
+
+## Date / time
+
+- Pick one date abstraction for the project and use it consistently. Don't mix `Date` objects, ISO strings, and library types in the same flow without explicit conversion. (Discover which library/helper the project uses by checking how existing code handles dates.)
+
+## Comments
+
+- Default to writing no comments. Well-named identifiers do the work of explaining *what*.
+- Only add a comment when the *why* is non-obvious: a hidden constraint, a subtle invariant, a workaround for a specific bug, behavior that would surprise a reader.
+- Keep comments short and local to the code they explain. Avoid long branch-order maps, implementation walkthroughs, or copied design/spec context; extract a helper or rename variables instead.
+- Don't reference plans, tasks, PRs, waves, phases, tickets, UI specs, or callers ("added for X flow", "used by Y") — that rots and belongs in the PR description.
+- Delete or rewrite nearby comments when changing code. A stale comment is worse than no comment.

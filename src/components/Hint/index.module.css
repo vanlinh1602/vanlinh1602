@@ -1,0 +1,17 @@
+.hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 8px 18px;
+  background: var(--white);
+  border: 3px solid var(--yellow);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  text-align: center;
+  z-index: 4;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+}

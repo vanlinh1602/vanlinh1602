@@ -1,0 +1,32 @@
+name: Generate contribution snake
+
+# Draws the profile README's contribution snake and publishes it to the
+# `output` branch, so main never receives bot commits.
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Generate snake SVGs
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake.svg?color_snake=#ff6f9f&color_dots=#fff0f5,#ffd6e4,#ffb3cf,#ff9ec4,#ff6f9f
+            dist/github-snake-dark.svg?palette=github-dark&color_snake=#9ad7ff&color_dots=#161b22,#4a2f40,#7a3f5e,#c9658f,#ff9ec4
+
+      - name: Publish to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

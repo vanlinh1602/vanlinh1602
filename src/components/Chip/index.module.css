@@ -1,0 +1,23 @@
+.chip {
+  background: var(--pink-soft);
+  border: 2px solid var(--pink);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.9rem;
+}
+
+.small {
+  font-size: 0.78rem;
+  padding: 2px 10px;
+  background: var(--blue-soft);
+  border-color: var(--blue);
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  background: var(--yellow);
+}
