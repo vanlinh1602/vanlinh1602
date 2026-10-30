@@ -23,7 +23,8 @@ export default function App() {
     <>
       <div className={styles.stage}>
         <Canvas
-          shadows
+          // Newer three dropped PCFSoftShadowMap, which bare `shadows` picks.
+          shadows="percentage"
           dpr={PIXEL_RATIO_RANGE}
           camera={{ fov: CAMERA_FOV, position: HOME_VIEW.position }}
           gl={{ toneMapping: NoToneMapping }}

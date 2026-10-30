@@ -45,7 +45,7 @@ src/scene/
 
 ## Performance (useFrame)
 
-- **Never allocate inside `useFrame`**: no `new Vector3()`, `.clone()`, array/object literals for math. Create scratch objects once with `useMemo`/`useRef` (see `CameraRig`). Enforced by `@react-three/no-new-in-loop` and `no-clone-in-loop`.
+- **Never allocate inside `useFrame`**: no `new Vector3()`, `.clone()`, array/object literals for math. Create scratch objects once with `useRef` (see `CameraRig`); the React Compiler lint rules reject mutating `useMemo` values. Enforced by `@react-three/no-new-in-loop` and `no-clone-in-loop`.
 - **Never call `setState` inside `useFrame`.** Mutate refs (`ref.current.rotation.y = …`) instead.
 - Guard refs: `if (!ref.current) return;` — refs are typed `useRef<Group>(null)`.
 - Make motion frame-rate independent: use `delta` with `MathUtils.damp` or `1 - Math.pow(k, delta)`, and `clock.elapsedTime` for periodic motion. Never assume 60 fps.
