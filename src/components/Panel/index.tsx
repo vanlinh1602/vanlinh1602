@@ -1,12 +1,16 @@
 import type { ComponentType } from 'react';
 
 import SectionIcon from '@/components/SectionIcon';
-import { COPY, SECTIONS } from '@/content';
+import { useContent } from '@/hooks';
 import { type ActiveSection, ENUM_SECTION } from '@/types';
 
 import AboutContent from './AboutContent';
 import ContactContent from './ContactContent';
+import ExperienceContent from './ExperienceContent';
+import GardenContent from './GardenContent';
+import GitHubContent from './GitHubContent';
 import styles from './index.module.css';
+import NotesContent from './NotesContent';
 import ProjectsContent from './ProjectsContent';
 
 interface PanelProps {
@@ -18,12 +22,17 @@ const SECTION_CONTENT: Readonly<Record<ENUM_SECTION, ComponentType>> = {
   [ENUM_SECTION.PROJECTS]: ProjectsContent,
   [ENUM_SECTION.ABOUT]: AboutContent,
   [ENUM_SECTION.CONTACT]: ContactContent,
+  [ENUM_SECTION.EXPERIENCE]: ExperienceContent,
+  [ENUM_SECTION.NOTES]: NotesContent,
+  [ENUM_SECTION.GARDEN]: GardenContent,
+  [ENUM_SECTION.GITHUB]: GitHubContent,
 };
 
 export default function Panel({ active, onClose }: PanelProps) {
+  const { copy, sections } = useContent();
   if (!active) return null;
 
-  const { label } = SECTIONS[active];
+  const { label } = sections[active];
   const Content = SECTION_CONTENT[active];
 
   return (
@@ -41,7 +50,7 @@ export default function Panel({ active, onClose }: PanelProps) {
         <button
           className={styles.close}
           onClick={onClose}
-          aria-label={COPY.closePanel}
+          aria-label={copy.closePanel}
         >
           <svg
             width="18"
@@ -60,7 +69,7 @@ export default function Panel({ active, onClose }: PanelProps) {
         <Content />
       </div>
       <button className={styles.backButton} onClick={onClose}>
-        <span aria-hidden="true">←</span> {COPY.backToTown}
+        <span aria-hidden="true">←</span> {copy.backToTown}
       </button>
     </aside>
   );

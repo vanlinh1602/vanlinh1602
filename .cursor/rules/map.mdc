@@ -34,12 +34,12 @@ src/components/TownMap/
 
 1. Add a member to `ENUM_SECTION` in `src/types/section.ts`.
 2. Fix every TypeScript error that follows — each `Record<ENUM_SECTION, …>` needs an entry:
-   - `content/sections.ts` (label + emoji)
+   - `content/vi/sections.ts` and `content/en/sections.ts` (label + emoji)
    - `configs/mapViews.ts` (`DISTRICT_POSITIONS` and `SECTION_VIEWS`)
    - `components/Panel/index.tsx` (a new `Panel/<Name>Content.tsx`)
    - `configs/mapViews.ts` (`DISTRICT_SHAPES`, `DISTRICT_SIGNS`)
 3. Align the new hit region and sign with a landmark in the backdrop; update the artwork only when needed.
-4. Add any new text to `src/content/`.
+4. Add any new text to both `src/content/vi/` and `src/content/en/`.
 
 ## Accessibility And Motion
 

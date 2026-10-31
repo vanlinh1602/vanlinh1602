@@ -17,6 +17,34 @@
   pointer-events: none;
   max-width: calc(100vw - 300px);
 }
+.text {
+  margin: 0;
+}
+/* Desktop: the free top-centre slot, where the tour controls later appear. */
+.tourButton {
+  position: fixed;
+  top: max(20px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: var(--paper-shadow);
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--pink-deep);
+  border-radius: 8px;
+  background: var(--pink-soft);
+  color: var(--pink-deep);
+  font-size: 0.78rem;
+  font-weight: 800;
+  pointer-events: auto;
+  transition: background 0.16s ease;
+}
+.tourButton:hover {
+  background: var(--yellow-soft);
+}
 @media (max-width: 700px) {
   .desktopHint {
     display: none;
@@ -28,8 +56,24 @@
     top: max(62px, calc(env(safe-area-inset-top) + 52px));
     bottom: auto;
     left: 10px;
-    padding: 5px 9px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 4px 4px 9px;
     max-width: calc(100vw - 20px);
     font-size: 0.62rem;
+  }
+  .tourButton {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    min-height: 28px;
+    padding: 0 9px;
+    font-size: 0.66rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tourButton {
+    transition: none;
   }
 }

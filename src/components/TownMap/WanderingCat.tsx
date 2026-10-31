@@ -6,7 +6,7 @@ import {
   PALETTE,
   PET_RESPONSE_MS,
 } from '@/configs';
-import { COPY } from '@/content';
+import { useContent } from '@/hooks';
 
 import styles from './living.module.css';
 
@@ -19,6 +19,7 @@ export default function WanderingCat({
   route,
   isRunning,
 }: WanderingCatProps): ReactElement {
+  const { copy } = useContent();
   const [reaction, setReaction] = useState<number>(0);
   const [isReacting, setIsReacting] = useState<boolean>(false);
 
@@ -39,7 +40,7 @@ export default function WanderingCat({
 
   return (
     <g className={styles.catRoute} data-cat={route.id} onClick={handlePet}>
-      <title>{COPY.petCat}</title>
+      <title>{copy.petCat}</title>
       <animateMotion
         path={route.path}
         dur={`${route.duration}s`}

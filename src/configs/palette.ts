@@ -44,4 +44,21 @@ export const PALETTE = {
   catFur: '#ffd9a8',
   catFurDark: '#ffc58a',
   catNose: '#ff7aa5',
+
+  dawnTint: '#f3c6a5',
+  duskTint: '#e59a7c',
+  nightTint: '#3d4a7c',
+  star: '#fffbe6',
+  petal: '#f0a3b6',
+  autumnLeaf: '#e0a15e',
+  snow: '#ffffff',
+  firefly: '#f6f0a0',
+
+  skin: '#f5d2b0',
+  hairDark: '#5b4636',
+  hairLight: '#b07a4b',
+  shirtBlue: '#8fb3c9',
+  shirtGreen: '#9fbe7c',
+  shirtPink: '#e8a29d',
+  trousers: '#6f6253',
 } as const;

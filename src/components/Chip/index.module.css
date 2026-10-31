@@ -21,3 +21,20 @@
 .link:hover {
   background: var(--yellow-soft);
 }
+.link svg {
+  margin-right: 6px;
+}
+.toggle {
+  min-height: 34px;
+  font-weight: 700;
+  color: var(--ink-muted);
+  background: var(--white);
+}
+.toggle:hover {
+  background: var(--yellow-soft);
+}
+.pressed {
+  color: var(--pink-deep);
+  background: var(--pink-soft);
+  border-color: var(--pink-deep);
+}

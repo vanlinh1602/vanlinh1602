@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 
 import SectionIcon from '@/components/SectionIcon';
-import { COPY, PROFILE, SECTION_IDS, SECTIONS } from '@/content';
+import { SECTION_IDS } from '@/content';
+import { useContent } from '@/hooks';
 import type { ActiveSection } from '@/types';
 
 import styles from './index.module.css';
@@ -13,6 +14,7 @@ interface TopBarProps {
   onToggleMotion: () => void;
   isMusicEnabled: boolean;
   onToggleMusic: () => void;
+  onToggleLanguage: () => void;
 }
 
 export default function TopBar({
@@ -22,14 +24,17 @@ export default function TopBar({
   onToggleMotion,
   isMusicEnabled,
   onToggleMusic,
+  onToggleLanguage,
 }: TopBarProps) {
+  const { copy, profile, sections } = useContent();
+
   return (
     <header className={styles.topBar}>
       <h1 className={styles.brandHeading}>
         <button
           className={styles.brand}
           onClick={() => onSelect(null)}
-          aria-label={`${PROFILE.name} — ${COPY.home}`}
+          aria-label={`${profile.name} — ${copy.home}`}
         >
           <svg
             className={styles.brandMark}
@@ -40,16 +45,16 @@ export default function TopBar({
             <path d="M 6 19 L 20 7 L 34 19 M 10 16 V 33 H 30 V 16 M 17 33 V 24 H 23 V 33 M 15 17 H 17 M 23 17 H 25" />
           </svg>
           <span className={styles.brandCopy}>
-            <span className={styles.brandName}>{PROFILE.name}</span>
-            <span className={styles.brandTitle}>{PROFILE.title}</span>
+            <span className={styles.brandName}>{profile.name}</span>
+            <span className={styles.brandTitle}>{profile.title}</span>
           </span>
         </button>
       </h1>
       <button
         className={styles.motionButton}
         onClick={onToggleMotion}
-        aria-label={isMotionEnabled ? COPY.pauseMotion : COPY.resumeMotion}
-        title={isMotionEnabled ? COPY.pauseMotion : COPY.resumeMotion}
+        aria-label={isMotionEnabled ? copy.pauseMotion : copy.resumeMotion}
+        title={isMotionEnabled ? copy.pauseMotion : copy.resumeMotion}
         aria-pressed={isMotionEnabled}
       >
         <svg
@@ -73,8 +78,8 @@ export default function TopBar({
       <button
         className={clsx(styles.motionButton, styles.musicButton)}
         onClick={onToggleMusic}
-        aria-label={isMusicEnabled ? COPY.muteMusic : COPY.playMusic}
-        title={isMusicEnabled ? COPY.muteMusic : COPY.playMusic}
+        aria-label={isMusicEnabled ? copy.muteMusic : copy.playMusic}
+        title={isMusicEnabled ? copy.muteMusic : copy.playMusic}
         aria-pressed={isMusicEnabled}
       >
         <svg
@@ -94,10 +99,19 @@ export default function TopBar({
           {!isMusicEnabled && <path d="M 3 21 L 21 3" />}
         </svg>
       </button>
+      <button
+        className={clsx(styles.motionButton, styles.languageButton)}
+        onClick={onToggleLanguage}
+        aria-label={copy.switchLanguage}
+        title={copy.switchLanguage}
+        lang={copy.otherLanguageCode.toLowerCase()}
+      >
+        {copy.otherLanguageCode}
+      </button>
       {/* Keyboard and screen-reader fallback for the map districts. */}
       <nav
         className={clsx(styles.nav, styles.compactNav)}
-        aria-label={COPY.navigation}
+        aria-label={copy.navigation}
       >
         {SECTION_IDS.map((id) => (
           <button
@@ -106,11 +120,11 @@ export default function TopBar({
             onClick={() => onSelect(id)}
             aria-pressed={active === id}
             aria-controls="profile-section"
-            aria-label={SECTIONS[id].label}
-            title={SECTIONS[id].label}
+            aria-label={sections[id].label}
+            title={sections[id].label}
           >
             <SectionIcon section={id} />
-            <span>{SECTIONS[id].label}</span>
+            <span>{sections[id].label}</span>
           </button>
         ))}
       </nav>

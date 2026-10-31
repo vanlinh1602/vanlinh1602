@@ -11,14 +11,14 @@ React conventions for this repo. Pairs with `typescript.mdc` (language hygiene) 
 - **Build**: Vite 5 + `@vitejs/plugin-react`, TypeScript strict mode.
 - **UI**: React + inline SVG for the town map. See `map.mdc`.
 - **Styling**: CSS Modules + CSS variables. No Tailwind, no CSS-in-JS.
-- **State**: local `useState` lifted to `App.tsx`. There is no router, store, or server state; do not add Zustand/React Query/React Router unless the feature genuinely needs it.
+- **State**: local `useState` lifted to `App.tsx`; the active locale's content flows through `ContentContext`. There is no router, store, or server state; do not add Zustand/React Query/React Router unless the feature genuinely needs it.
 
 ## Folder Layout
 
 ```
 src/
 ├── main.tsx            # React root only
-├── App.tsx             # Owns `active` section state, mounts <TownMap> + DOM UI
+├── App.tsx             # Owns `active` section (URL hash) and locale, mounts <TownMap> + DOM UI
 ├── index.css           # Global reset + CSS design tokens (:root)
 ├── components/         # DOM (HTML) UI rendered outside the canvas
 ├── content/            # All user-visible text and portfolio data
@@ -28,7 +28,7 @@ src/
 └── utils/              # Pure helpers (create when first needed)
 ```
 
-- Never put user-visible strings in components; add them to `src/content/` (`copy.ts` for fixed UI text, the other files for portfolio data).
+- Never put user-visible strings in components; add them to both `src/content/vi/` and `src/content/en/` (`copy.ts` for fixed UI text, the other files for portfolio data) and read them with `useContent()`. Locale-independent data (`contact.ts`, `SECTION_IDS`) stays at the `src/content/` root.
 - Never hardcode tunable numbers that other files depend on (map positions, zoom levels, colors) inside components; put them in `src/configs/`.
 
 ## Path Aliases

@@ -107,6 +107,20 @@
 .active .labelPlate {
   filter: brightness(1.1);
 }
+.bubble {
+  opacity: 0;
+  transform: translateY(5px) scale(0.9);
+  transform-origin: 0 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  pointer-events: none;
+}
+.district:hover .bubble,
+.greeting .bubble {
+  opacity: 1;
+  transform: none;
+}
 .label text {
   font-family: inherit;
   font-size: 10.5px;
@@ -190,6 +204,7 @@
 @media (prefers-reduced-motion: reduce) {
   .world,
   .district,
+  .bubble,
   .buildingHit,
   .labelPlate {
     transition: none;

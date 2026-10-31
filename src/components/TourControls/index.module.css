@@ -1,0 +1,111 @@
+.tour {
+  position: fixed;
+  top: max(20px, env(safe-area-inset-top));
+  left: 50%;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 5px 5px 14px;
+  overflow: hidden;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  box-shadow: var(--paper-shadow);
+  animation: tourArrive 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 6px 0 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.count {
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--pink-soft);
+  color: var(--pink-deep);
+  font-size: 0.72rem;
+}
+.control {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.control:hover:not(:disabled) {
+  background: var(--yellow-soft);
+}
+.control:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.timer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--pink);
+  transform-origin: 0 50%;
+  animation: tourTimer var(--tour-step) linear both;
+}
+@keyframes tourArrive {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+}
+@keyframes tourTimer {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 700px) {
+  .tour {
+    top: max(58px, calc(env(safe-area-inset-top) + 48px));
+    left: 10px;
+    right: 10px;
+    transform: none;
+    padding-left: 10px;
+  }
+  .status {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.74rem;
+  }
+  .control {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 700px) {
+  .tour {
+    animation-name: tourFade;
+  }
+}
+@keyframes tourFade {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour {
+    animation: none;
+  }
+}

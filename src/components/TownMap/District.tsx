@@ -1,20 +1,24 @@
 import clsx from 'clsx';
 
 import { DISTRICT_SHAPES, DISTRICT_SIGNS, PALETTE } from '@/configs';
-import { SECTIONS } from '@/content';
+import { useContent } from '@/hooks';
 import type { ENUM_SECTION, Vec2 } from '@/types';
 
 import styles from './index.module.css';
+import SpeechBubble from './SpeechBubble';
 
 interface DistrictProps {
   id: ENUM_SECTION;
   position: Vec2;
   isActive: boolean;
   isDimmed: boolean;
+  /** Keeps the greeting bubble open, e.g. while the tour stops here. */
+  isGreeting: boolean;
   onSelect: (id: ENUM_SECTION) => void;
 }
 
 const SIGN_HEIGHT = 21;
+const BUBBLE_LIFT = 16;
 const SIGN_COLORS = {
   wood: {
     face: PALETTE.signWood,
@@ -38,9 +42,11 @@ export default function District({
   position,
   isActive,
   isDimmed,
+  isGreeting,
   onSelect,
 }: DistrictProps) {
-  const { label } = SECTIONS[id];
+  const { sections } = useContent();
+  const { label, greeting } = sections[id];
   const sign = DISTRICT_SIGNS[id];
   const colors = SIGN_COLORS[sign.material];
   const left: number = -sign.width / 2;
@@ -53,13 +59,14 @@ export default function District({
           styles.district,
           isActive && styles.active,
           isDimmed && styles.dimmed,
+          isGreeting && styles.greeting,
         )}
         onClick={() => onSelect(id)}
         data-district={id}
       >
         <path className={styles.buildingHit} d={DISTRICT_SHAPES[id]} />
         <g
-          transform={`translate(${sign.offset[0]} ${sign.offset[1]}) matrix(1 ${sign.slope} 0 1 0 0)`}
+          transform={`translate(${sign.offset[0]} ${sign.offset[1]}) matrix(1 ${sign.slope} 0 1 0 0) scale(${sign.scale ?? 1})`}
           data-map-label={id}
         >
           <g className={styles.label} data-material={sign.material}>
@@ -115,6 +122,13 @@ export default function District({
             >
               {label}
             </text>
+          </g>
+        </g>
+        <g
+          transform={`translate(${sign.offset[0]} ${sign.offset[1] - BUBBLE_LIFT})`}
+        >
+          <g className={styles.bubble} data-greeting={id}>
+            <SpeechBubble text={greeting} />
           </g>
         </g>
       </g>

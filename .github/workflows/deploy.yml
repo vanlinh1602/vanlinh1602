@@ -46,6 +46,8 @@ jobs:
         env:
           # "/<repo>" for project sites, "" for user sites or custom domains.
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          # Absolute URL for the Open Graph tags in index.html.
+          VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

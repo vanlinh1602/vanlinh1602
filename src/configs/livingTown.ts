@@ -1,5 +1,7 @@
 import type { Vec2 } from '@/types';
 
+import { PALETTE } from './palette';
+
 export interface CatRoute {
   readonly id: string;
   readonly path: string;
@@ -67,6 +69,45 @@ export const CAT_ROUTES: readonly CatRoute[] = [
     isGray: true,
   },
 ];
+
+export interface VillagerRoute {
+  readonly id: string;
+  /** Follows a road in the backdrop; walkers go there and back. */
+  readonly path: string;
+  readonly duration: number;
+  readonly delay: number;
+  readonly shirt: string;
+  readonly hair: string;
+}
+
+export const VILLAGER_ROUTES: readonly VillagerRoute[] = [
+  {
+    id: 'main-street',
+    path: 'M 375 182 L 440 236 L 500 290 L 545 340 L 615 400 L 690 446 L 722 470',
+    duration: 46,
+    delay: 4,
+    shirt: PALETTE.shirtBlue,
+    hair: PALETTE.hairDark,
+  },
+  {
+    id: 'bus-stop-road',
+    path: 'M 606 178 L 560 196 L 510 216 L 450 246 L 380 280 L 330 296 L 285 316 L 240 336 L 195 350',
+    duration: 52,
+    delay: 21,
+    shirt: PALETTE.shirtPink,
+    hair: PALETTE.hairLight,
+  },
+  {
+    id: 'pond-lane',
+    path: 'M 732 490 L 700 516 L 668 545 L 628 562 L 600 580 L 570 600 L 522 624',
+    duration: 34,
+    delay: 9,
+    shirt: PALETTE.shirtGreen,
+    hair: PALETTE.hairDark,
+  },
+];
+
+export const VILLAGER_BUBBLE_MS = 2200;
 
 export const BUTTERFLY_ROUTES = [
   {

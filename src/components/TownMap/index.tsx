@@ -18,18 +18,23 @@ import {
   SECTION_VIEWS,
   TOWN_ARTWORK,
 } from '@/configs';
-import { COPY, SECTION_IDS } from '@/content';
-import { useMapCamera } from '@/hooks';
-import type { ActiveSection } from '@/types';
+import { SECTION_IDS } from '@/content';
+import { useContent, useMapCamera } from '@/hooks';
+import type { ActiveSection, Ambience } from '@/types';
 
+import Daylight from './Daylight';
 import District from './District';
 import styles from './index.module.css';
 import LivingScenery from './LivingScenery';
+import SeasonalWeather from './SeasonalWeather';
 
 interface TownMapProps {
   active: ActiveSection;
   onSelect: (section: ActiveSection) => void;
   isMotionRunning: boolean;
+  ambience: Ambience;
+  /** Section the tour is presenting; its building keeps its greeting open. */
+  greetingSection: ActiveSection;
   zoom: number;
   onZoomChange: (zoom: number) => void;
 }
@@ -56,9 +61,12 @@ export default function TownMap({
   active,
   onSelect,
   isMotionRunning,
+  ambience,
+  greetingSection,
   zoom,
   onZoomChange,
 }: TownMapProps) {
+  const { copy } = useContent();
   const worldRef = useRef<SVGGElement>(null);
   const [mapTap, setMapTap] = useState<MapTap | null>(null);
   const {
@@ -128,7 +136,7 @@ export default function TownMap({
         className={styles.viewport}
         ref={viewportRef}
         role="region"
-        aria-label={COPY.mapDescription}
+        aria-label={copy.mapDescription}
         tabIndex={0}
         style={zoomStyle}
         onPointerDown={handlePointerDown}
@@ -161,9 +169,21 @@ export default function TownMap({
                 preserveAspectRatio="none"
                 onClick={handleBackgroundClick}
               >
-                <title>{COPY.mapDescription}</title>
+                <title>{copy.mapDescription}</title>
               </image>
-              <LivingScenery isRunning={isMotionRunning} />
+              <LivingScenery
+                isRunning={isMotionRunning}
+                dayPhase={ambience.dayPhase}
+              />
+              <Daylight
+                dayPhase={ambience.dayPhase}
+                isRunning={isMotionRunning}
+              />
+              <SeasonalWeather
+                season={ambience.season}
+                dayPhase={ambience.dayPhase}
+                isRunning={isMotionRunning}
+              />
               {mapTap && (
                 <g
                   key={mapTap.id}
@@ -202,6 +222,7 @@ export default function TownMap({
                   position={DISTRICT_POSITIONS[id]}
                   isActive={active === id}
                   isDimmed={active !== null && active !== id}
+                  isGreeting={greetingSection === id}
                   onSelect={onSelect}
                 />
               ))}
@@ -212,13 +233,13 @@ export default function TownMap({
       <div
         className={styles.zoomControls}
         role="group"
-        aria-label={COPY.zoomControls}
+        aria-label={copy.zoomControls}
         data-focused={active !== null}
       >
         <button
           type="button"
-          aria-label={COPY.zoomIn}
-          title={COPY.zoomIn}
+          aria-label={copy.zoomIn}
+          title={copy.zoomIn}
           disabled={zoom >= MAP_ZOOM.maximum - MAP_ZOOM.epsilon}
           onClick={() => changeZoom(zoom * MAP_ZOOM.step)}
         >
@@ -235,13 +256,13 @@ export default function TownMap({
             <path d="M 12 5 V 19 M 5 12 H 19" />
           </svg>
         </button>
-        <output className={styles.zoomValue} aria-label={COPY.zoomLevel}>
+        <output className={styles.zoomValue} aria-label={copy.zoomLevel}>
           {Math.round(zoom * 100)}%
         </output>
         <button
           type="button"
-          aria-label={COPY.zoomOut}
-          title={COPY.zoomOut}
+          aria-label={copy.zoomOut}
+          title={copy.zoomOut}
           disabled={zoom <= minimumZoom + MAP_ZOOM.epsilon}
           onClick={() => changeZoom(zoom / MAP_ZOOM.step)}
         >
@@ -260,8 +281,8 @@ export default function TownMap({
         </button>
         <button
           type="button"
-          aria-label={COPY.resetView}
-          title={COPY.resetView}
+          aria-label={copy.resetView}
+          title={copy.resetView}
           onClick={handleReset}
         >
           <svg

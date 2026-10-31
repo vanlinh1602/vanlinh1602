@@ -14,19 +14,25 @@ Before any code change, read these (all are `alwaysApply: true` for Cursor):
 
 ## Where Things Live
 
-| Want to change…                         | Edit                                                         |
-| --------------------------------------- | ------------------------------------------------------------ |
-| Name, intro, skills, projects, contact  | `src/content/*.ts`                                           |
-| Fixed UI text (hint, aria labels)       | `src/content/copy.ts`                                        |
-| Section labels / emoji                  | `src/content/sections.ts`                                    |
-| District positions and zoom per section | `src/configs/mapViews.ts`                                    |
-| Map (SVG) colors                        | `src/configs/palette.ts`                                     |
-| DOM colors                              | CSS variables in `src/index.css`                             |
-| Town backdrop and cat sprite            | `public/images/town/`, paths in `src/configs/artwork.ts`     |
-| Animated scenery                        | `src/components/TownMap/Atmosphere.tsx`, `LivingScenery.tsx` |
-| Building hit regions and facade signs   | `src/configs/mapViews.ts`, `TownMap/District.tsx`            |
-| Panel content for a section             | `src/components/Panel/<Name>Content.tsx`                     |
-| Add a new clickable section             | Follow "Adding A New Section" in `.cursor/rules/map.mdc`     |
+| Want to change…                         | Edit                                                                                                              |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Name, intro, skills, projects           | `src/content/vi/*.ts` and `src/content/en/*.ts`                                                                   |
+| Experience, notes, garden               | `src/content/{vi,en}/{experience,notes,garden}.ts`                                                                |
+| GitHub stats (username, cache, limits)  | `src/configs/github.ts`; fetched live in `hooks/gitHubStats.ts`                                                   |
+| Email and social links                  | `src/content/contact.ts`                                                                                          |
+| Fixed UI text (hint, aria labels)       | `src/content/{vi,en}/copy.ts`                                                                                     |
+| Section labels / emoji                  | `src/content/{vi,en}/sections.ts`                                                                                 |
+| District positions and zoom per section | `src/configs/mapViews.ts`                                                                                         |
+| Map (SVG) colors                        | `src/configs/palette.ts`                                                                                          |
+| Page title and share (Open Graph) tags  | `index.html`, `public/og-image.jpg`                                                                               |
+| DOM colors                              | CSS variables in `src/index.css`                                                                                  |
+| Town backdrop and cat sprite            | `public/images/town/`, paths in `src/configs/artwork.ts`                                                          |
+| Animated scenery                        | `src/components/TownMap/Atmosphere.tsx`, `LivingScenery.tsx`                                                      |
+| Day/night, seasons, villagers           | `src/configs/ambience.ts`, `VILLAGER_ROUTES` in `configs/livingTown.ts`; preview with `?time=night&season=winter` |
+| Guided tour timing                      | `src/configs/tour.ts`, `hooks/tour.ts`                                                                            |
+| Building hit regions and facade signs   | `src/configs/mapViews.ts`, `TownMap/District.tsx`                                                                 |
+| Panel content for a section             | `src/components/Panel/<Name>Content.tsx`                                                                          |
+| Add a new clickable section             | Follow "Adding A New Section" in `.cursor/rules/map.mdc`                                                          |
 
 ## Commands
 
@@ -68,6 +74,7 @@ This repo is the special profile repo `vanlinh1602/vanlinh1602`, so `README.md` 
 
 ## Working Agreements
 
-- Code, comments and docs are in English. User-visible text in `src/content/` is Vietnamese.
+- Code, comments and docs are in English. User-visible text in `src/content/` exists in Vietnamese (`vi/`, the default) and English (`en/`); both locales satisfy `SiteContent`, so add every new string to both. Components read it through `useContent()`.
+- The open section lives in `location.hash` (`useHashSection`), so `/#projects` links straight to a district.
 - Do not add dependencies (routers, state libraries, UI kits, Tailwind) without a concrete need; the app is intentionally small.
 - Do not commit `dist/`, `.env*` or editor files.

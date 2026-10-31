@@ -8,19 +8,27 @@ import {
   LAMP_LIGHTS,
   PALETTE,
   POND_RIPPLES,
+  VILLAGER_ROUTES,
 } from '@/configs';
+import { ENUM_DAY_PHASE } from '@/types';
 
 import Atmosphere from './Atmosphere';
 import styles from './living.module.css';
+import Villager from './Villager';
 import WanderingCat from './WanderingCat';
 
 interface LivingSceneryProps {
   isRunning: boolean;
+  dayPhase: ENUM_DAY_PHASE;
 }
 
 export default function LivingScenery({
   isRunning,
+  dayPhase,
 }: LivingSceneryProps): ReactElement {
+  // Villagers head home for the night; the cats stay out.
+  const hasVillagers: boolean = dayPhase !== ENUM_DAY_PHASE.NIGHT;
+
   return (
     <g className={styles.layer} data-motion={isRunning ? 'running' : 'paused'}>
       {CLOUDS.map(([x, y], index) => (
@@ -86,6 +94,10 @@ export default function LivingScenery({
         </g>
       ))}
       <Atmosphere />
+      {hasVillagers &&
+        VILLAGER_ROUTES.map((route, index) => (
+          <Villager key={route.id} route={route} index={index} />
+        ))}
       {CAT_ROUTES.map((route) => (
         <WanderingCat key={route.id} route={route} isRunning={isRunning} />
       ))}

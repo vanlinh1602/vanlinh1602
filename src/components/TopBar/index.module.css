@@ -32,6 +32,13 @@
 .musicButton {
   right: calc(max(20px, env(safe-area-inset-right)) + 54px);
 }
+.languageButton {
+  right: calc(max(20px, env(safe-area-inset-right)) + 108px);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
 .brandHeading {
   position: absolute;
   top: max(20px, env(safe-area-inset-top));
@@ -147,6 +154,15 @@
 .compactNav .navButton > span {
   display: inline;
 }
+/* Seven labelled buttons stop fitting beside the hint; titles keep the names. */
+@media (max-width: 1180px) {
+  .compactNav .navButton {
+    padding: 8px 11px;
+  }
+  .compactNav .navButton > span {
+    display: none;
+  }
+}
 @media (max-width: 700px) {
   .motionButton {
     top: max(10px, env(safe-area-inset-top));
@@ -161,6 +177,10 @@
   }
   .musicButton {
     right: 54px;
+  }
+  .languageButton {
+    right: 98px;
+    font-size: 0.72rem;
   }
   .brandHeading {
     top: max(10px, env(safe-area-inset-top));

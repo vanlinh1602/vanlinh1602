@@ -8,9 +8,18 @@ interface ChipProps {
   isSmall?: boolean;
   /** Renders the chip as an external link when set. */
   href?: string;
+  /** Renders the chip as a toggle button when set. */
+  onClick?: () => void;
+  isPressed?: boolean;
 }
 
-export default function Chip({ children, isSmall = false, href }: ChipProps) {
+export default function Chip({
+  children,
+  isSmall = false,
+  href,
+  onClick,
+  isPressed = false,
+}: ChipProps) {
   if (href) {
     return (
       <a
@@ -21,6 +30,23 @@ export default function Chip({ children, isSmall = false, href }: ChipProps) {
       >
         {children}
       </a>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        className={clsx(
+          styles.chip,
+          styles.toggle,
+          isPressed && styles.pressed,
+        )}
+        onClick={onClick}
+        aria-pressed={isPressed}
+      >
+        {children}
+      </button>
     );
   }
 

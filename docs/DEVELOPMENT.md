@@ -22,7 +22,7 @@ npm run check    # lint + kiểm tra format + build (chạy trước khi commit)
 src/
 ├── main.tsx / App.tsx   # Điểm vào, giữ state section đang mở
 ├── index.css            # Reset + màu giao diện HTML (CSS variables)
-├── content/             # ✏️ NỘI DUNG CỦA BẠN: profile, dự án, liên hệ, chữ trên UI
+├── content/             # ✏️ NỘI DUNG CỦA BẠN: vi/ (mặc định) và en/, contact.ts dùng chung
 ├── configs/             # Vị trí và mức zoom từng khu, bảng màu SVG
 ├── components/          # Giao diện: TopBar, Panel, Chip, Hint, TownMap (bản đồ SVG)
 │   └── TownMap/         # Illustrated SVG scene, District hit regions and labels
@@ -39,13 +39,19 @@ Quy tắc chi tiết cho người và AI agent nằm ở [CLAUDE.md](../CLAUDE.m
 
 ## Chỉnh sửa thường gặp
 
-1. **Nội dung**: sửa các file trong `src/content/`, đổi `<title>` trong `index.html`.
+1. **Nội dung**: sửa cả `src/content/vi/` và `src/content/en/` (TypeScript báo lỗi nếu hai bản lệch nhau). Nút VI/EN trên TopBar đổi ngôn ngữ, lựa chọn được lưu trong `localStorage`; lần đầu trình duyệt tiếng Việt thấy bản VI, còn lại thấy EN. Tiêu đề trang đổi theo `copy.pageTitle`.
+   Tiêu đề, mô tả và thẻ chia sẻ (Open Graph) mặc định nằm trong `index.html`, ảnh chia sẻ là `public/og-image.jpg`; CI truyền `VITE_SITE_URL` để các link này là URL tuyệt đối.
+   Ảnh dự án, avatar và CV đặt trong `public/` (ví dụ `public/images/projects/`, `public/images/avatar.png`, `public/cv/`) rồi ghi đường dẫn tương đối vào `image`, `avatar`, `resume` trong `src/content/{vi,en}/`; thiếu avatar thì hiện chữ cái đầu, thiếu CV thì ẩn nút tải. Trạng thái "sẵn sàng nhận việc" là `isAvailable` trong `src/content/contact.ts`.
+   Các khu Kinh nghiệm, Bảng tin, Vườn nhỏ lấy dữ liệu từ `experience.ts`, `notes.ts`, `garden.ts` trong `src/content/{vi,en}/`. Khu GitHub gọi thẳng GitHub REST API (không cần token, giới hạn 60 lượt/giờ cho mỗi IP người xem), lưu kết quả 30 phút trong `sessionStorage`; đổi username hoặc giới hạn trong `src/configs/github.ts`.
+   Mỗi khu có link riêng qua hash: `/#projects`, `/#about`, `/#contact`; nút Back của trình duyệt đóng/mở khu tương ứng.
 2. **Màu**: màu bản đồ ở `src/configs/palette.ts`, màu giao diện HTML ở `:root` trong `src/index.css`.
 3. **Interactive landmarks:** `src/configs/mapViews.ts` owns positions, SVG hit-region paths, facade sign offsets, widths, perspective slopes, materials, and focus anchors. `DISTRICT_SIGNS` aligns each name with its building; signs scale with the artwork. The building hit region and HTML navigation remain the main interaction targets. Add sections through `ENUM_SECTION`, then update every section-keyed record and its panel content. Keep these coordinates aligned with the artwork.
 4. **Illustration:** the displayed clean backdrop is `public/images/town/background.png`; the original is retained in `assets/reference/storybook-town.png`. Generation prompts and the asset inventory live in `docs/artwork/`. `src/configs/artwork.ts` centralizes runtime URLs and uses Vite's base URL for subpath deployment. The coordinate system is 1000 × 700 map units. The fullscreen scene pans on its overflowing axis and selecting a section centers its landmark beside or above the content panel. The compact navigation also provides keyboard and screen-reader access.
 5. **Living scenery:** `TownMap/LivingScenery.tsx` composes the transparent `public/images/town/cat-walk-sheet.png` and ambient layers. `configs/livingTown.ts` owns cat routes, duration, offsets, and scenery positions. `hooks/sceneMotion.ts` combines user pause, reduced-motion preference, and document visibility. Cat route motion and facing use matching SMIL timing to stay synchronized. The map SVG pauses its SMIL timeline while `living.module.css` pauses frame and scenery animations. Artwork and animation layers share the same camera transform; they must remain aligned when dragging and zooming.
 6. **Camera:** `hooks/mapCamera.ts` handles anchored wheel zoom, pointer dragging, two-pointer pinch, keyboard shortcuts, and scroll positioning after resizing the canvas. `MAP_ZOOM` owns zoom bounds and step settings. App owns the manual zoom state and resets it for section navigation. The SVG and its hit regions scale together; the wrapper centers the art when fully zoomed out. Keep the wheel listener non-passive so zooming does not also scroll the page.
 7. **Ambient effects and feedback:** `TownMap/Atmosphere.tsx` contains butterfly and bird routes, wind, and clipped water/window effects. `WanderingCat.tsx` owns petting feedback and its cleanup timer. These use `living.module.css` and route coordinates in `configs/livingTown.ts`. Map taps convert client coordinates through the world's inverse screen matrix, so feedback remains aligned after zooming. Keep decorative animation under the shared motion pause state and leave building labels and core controls accessible.
+
+8. **Ngày/đêm, mùa, cư dân, tour:** `hooks/ambience.ts` đọc giờ và tháng của người xem (kiểm tra lại mỗi phút) để phủ màu bình minh/hoàng hôn/đêm, bật đèn đường, sao, và thời tiết theo mùa (hoa rơi, đom đóm, lá vàng, tuyết). Xem thử bằng `?time=dawn|day|dusk|night` và `?season=spring|summer|autumn|winter`. Màu và giờ nằm ở `configs/ambience.ts`. Cư dân đi theo `VILLAGER_ROUTES` (trên mặt đường của ảnh nền), bấm vào sẽ nói câu trong `copy.villagerLines`, và về nhà khi trời tối. Bong bóng chào khi rê chuột lên nhà lấy từ `greeting` trong `sections.ts`. Nút "Dạo một vòng" chạy `hooks/tour.ts`: tự chuyển khu sau `TOUR.stepMs` khi hoạt ảnh đang chạy, còn khi tắt hoạt ảnh hoặc giảm chuyển động thì chỉ chuyển khi bấm Tiếp.
 
 ## Công cụ
 
